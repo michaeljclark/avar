@@ -5,15 +5,16 @@ How to initialize a global variable using a thread-safe initializer in C11.
 ## Overview
 
 `avar` supports cross-platform thread-safe static initialization in C11.
-C++11 supports thread-safe initialization of non-trivial global varaibles,
-meaning global variables that are initialized by running code. This is
-not easily possible in C11. The key problem is the necessity to prevent
-threads from accessing global state during initialization.
+C++11 supports thread-safe initialization of non-trivially constructed
+globals, meaning variables that are initialized by running code. This is
+not easy to do in C11 in a portable way. The problem is preventing other
+threads from accessing global state during initialization, and to do that,
+one requires both lock-free atomics and a sleeping lock.
 
 These are the requirements for C initialization support:
 
 - Initialization function should be run only once.
-- Should not have any unexpected race conditions.
+- Should not have unexpected race conditions during any period of time.
 - Should be lock-free, using only atomic operations post initialization.
 
 Safe static initialization that is thread-safe and cross-platform is hard.
