@@ -8,6 +8,7 @@
 #endif
 
 #if defined (_WIN32)
+static inline void memory_barrier() { MemoryBarrier(); }
 static inline long compare_and_swap(long volatile *t, long o, long n) {
     return InterlockedCompareExchange(t,n,o);
 }
@@ -24,7 +25,6 @@ static inline void cond_destroy(cond_t *cond) { }
 static inline void cond_wait(cond_t *cond, mutex_t *mutex) { SleepConditionVariableCS(cond, mutex, INFINITE); }
 static inline void cond_signal(cond_t *cond) { WakeConditionVariable(cond); }
 static inline void cond_broadcast(cond_t *cond) { WakeAllConditionVariable(cond); }
-static inline void memory_barrier() { MemoryBarrier(); }
 static inline void mutex_init(mutex_t *mutex) { InitializeCriticalSection(mutex); }
 static inline void mutex_destroy(mutex_t *mutex) { DeleteCriticalSection(mutex); }
 static inline void mutex_lock(mutex_t *mutex) { EnterCriticalSection(mutex); }
