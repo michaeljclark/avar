@@ -37,7 +37,6 @@ static void* init_once(once_t *s, size_t arg, void*(*fn)(size_t arg))
             s->p = fn(arg);
             memory_barrier();
             s->state = kStateReady;          /* Running -> Ready */
-            memory_barrier();
             mutex_unlock(&s->mutex);
             return s->p;
         }
