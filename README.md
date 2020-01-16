@@ -46,7 +46,7 @@ cmake -G "Visual Studio 16 2019" -A x64 ..
 cmake --build . --config Release -j
 ```
 
-Building on Linux
+Building on Linux and macOS
 
 ```
 git clone https://github.com/michaeljclark/avar.git
