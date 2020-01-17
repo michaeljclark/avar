@@ -62,7 +62,7 @@ int main(int argc, char **argv)
     assert(a);
 
     /* thread local reference to heap */
-    b = malloc(sz);
+    b = (int*)malloc(sz);
     memset(b, 0x55, sz);
     assert(memcmp(a, b, sz) == 0);
 
