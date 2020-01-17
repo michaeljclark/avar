@@ -44,7 +44,7 @@ static void* init_once(once_t *s, size_t arg, void*(*fn)(size_t arg))
             do { old_state = s->state; }
             while (old_state == kStateBusy); /* Busy -> Busy */
         }
-    } while (trys-- > 0);
+    } while (--trys > 0);
     abort();
 }
 
